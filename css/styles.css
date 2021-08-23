@@ -1,0 +1,71 @@
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+.container {
+  max-width: 50%;
+  margin: 0px auto;
+}
+
+.size-input {
+  display: flex;
+}
+
+.size-input input {
+  margin-right: 15px;
+  border-radius: 10px;
+  padding: 10px;
+  outline: none;
+  border: 1px solid rgb(219, 219, 219);
+}
+
+.size-input button {
+  outline: none;
+  border-radius: 15px;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  color: white;
+  font-size: 14px;
+  background-color: #5c6bc0;
+}
+
+.matrix-container {
+  width: 100%;
+  max-width: 100%;
+  margin-top: 50px;
+  max-height: 80vh;
+  overflow: auto;
+}
+
+.matrix-container .row-container {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.input-container {
+  position: relative;
+  flex-shrink: 2;
+  flex-grow: 1;
+  min-width: 30px;
+  border: 1px solid rgb(219, 219, 219);
+  border-radius: 10px;
+  margin-right: 20px;
+  padding: 10px;
+}
+.input-container input {
+  outline: none;
+  outline: none;
+  border: none;
+  width: 100%;
+}
+
+.input-container:last-child::after {
+  content: "";
+  border-left: 1px solid grey;
+  width: 1px;
+  height: 100%;
+  left: -11px;
+  top: 0px;
+  position: absolute;
+}
