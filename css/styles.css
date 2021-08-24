@@ -1,7 +1,21 @@
 body {
   font-family: "Roboto", sans-serif;
+  /* background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab); */
+  background-size: 400% 400%;
+  animation: gradient 50s ease infinite;
 }
 
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
 .container {
   max-width: 50%;
   margin: 0px auto;
@@ -13,13 +27,29 @@ body {
 
 .size-input input {
   margin-right: 15px;
+  background-color: transparent;
+  color: white;
+
   border-radius: 10px;
   padding: 10px;
   outline: none;
-  border: 1px solid rgb(219, 219, 219);
+  border: 1px solid rgba(179, 179, 179, 0.329);
+  transition: border 0.3s ease;
+}
+.size-input input:focus {
+  border: 1px solid #929bd1;
 }
 
-.size-input button {
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: rgb(173, 173, 173);
+}
+
+.size-input .button {
+  margin-left: auto;
+}
+
+.button {
   outline: none;
   border-radius: 15px;
   border: none;
@@ -28,19 +58,28 @@ body {
   color: white;
   font-size: 14px;
   background-color: #5c6bc0;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #4a58a3;
+}
+
+.button:active {
+  background-color: #3f4a86;
 }
 
 .matrix-container {
   width: 100%;
   max-width: 100%;
-  margin-top: 50px;
-  max-height: 80vh;
+  max-height: 60vh;
   overflow: auto;
+  padding: 10px 0px;
 }
 
 .matrix-container .row-container {
   display: flex;
-  margin-bottom: 10px;
+  padding: 10px;
 }
 
 .input-container {
@@ -48,24 +87,91 @@ body {
   flex-shrink: 2;
   flex-grow: 1;
   min-width: 30px;
-  border: 1px solid rgb(219, 219, 219);
+  border: 1px solid rgba(179, 179, 179, 0.329);
   border-radius: 10px;
   margin-right: 20px;
   padding: 10px;
+  transition: border 0.3s ease;
 }
+
+.input-container:focus-within {
+  border: 1px solid #929bd1;
+}
+
 .input-container input {
   outline: none;
   outline: none;
   border: none;
+  background-color: transparent;
+  color: white;
+  height: 100%;
   width: 100%;
 }
 
 .input-container:last-child::after {
   content: "";
-  border-left: 1px solid grey;
+  border-left: 1px solid rgba(187, 187, 187, 0.329);
   width: 1px;
-  height: 100%;
+  height: 61px;
   left: -11px;
-  top: 0px;
+  top: -10px;
   position: absolute;
+}
+
+.title {
+  margin-bottom: 20px;
+  font-size: 25px;
+  border-bottom: 1px solid rgba(209, 209, 209, 0.329);
+  padding-bottom: 20px;
+  font-weight: 500;
+  justify-content: space-between;
+  align-items: flex-end;
+  display: flex;
+}
+
+.card {
+  padding: 25px;
+  margin: 20px 0px;
+  color: white;
+  background-color: rgba(54, 54, 54, 0.774);
+  border-radius: 10px;
+}
+
+#snackbar {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(54, 54, 54, 0.774);
+  padding: 13px 20px;
+  color: rgb(243, 243, 243);
+  border-radius: 20px;
+  min-width: 200px;
+  visibility: hidden;
+}
+
+#snackbar.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.3s, fadeout 0.3s 2.5s;
+  animation: fadein 0.3s, fadeout 0.3s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
 }

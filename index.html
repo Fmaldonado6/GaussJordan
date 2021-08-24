@@ -17,19 +17,39 @@
   </head>
   <body>
     <div class="container">
-      <h1>Gauss Jordan</h1>
-
-      <div class="size-input">
-        <input id="width" placeholder="Matrix width" type="number" />
-        <input id="height" placeholder="Matrix height" type="number" />
-        <button class="elevation-1" onclick="generateMatrix()">Generate</button>
+      <div class="card elevation-2">
+        <span class="title">Gauss Jordan</span>
+        <div class="size-input">
+          <input
+            id="width"
+            placeholder="Matrix width"
+            type="number"
+            value="3"
+          />
+          <input
+            id="height"
+            placeholder="Matrix height"
+            type="number"
+            value="3"
+          />
+          <button class="button elevation-1" onclick="generateMatrix()">
+            Generar
+          </button>
+        </div>
       </div>
+      <div class="card elevation-2">
+        <div class="title">
+          <span>Matriz</span>
+          <button class="button elevation-1" onclick="calculate()">
+            Calcular
+          </button>
+        </div>
 
-      <div class="matrix-container">
-        
+        <div class="matrix-container"></div>
       </div>
-
     </div>
+    <div id="snackbar">Some text some message..</div>
+
     <script src="js/index.js"></script>
   </body>
 </html>
