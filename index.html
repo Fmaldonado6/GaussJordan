@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="css/styles.css" rel="stylesheet" />
+    <link href="css/background.css" rel="stylesheet" />
     <link href="css/elevation.css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -21,17 +22,12 @@
         <span class="title">Gauss Jordan</span>
         <div class="size-input">
           <input
-            id="width"
-            placeholder="Matrix width"
+            id="size"
+            placeholder="Tamaño de matriz"
             type="number"
             value="3"
           />
-          <input
-            id="height"
-            placeholder="Matrix height"
-            type="number"
-            value="3"
-          />
+  
           <button class="button elevation-1" onclick="generateMatrix()">
             Generar
           </button>
@@ -47,8 +43,33 @@
 
         <div class="matrix-container"></div>
       </div>
+
+      <div class="card elevation-2" id="result-card">
+        <div class="title">
+          <span>Resultado</span>
+        </div>
+        <div id="results">
+
+        </div>
+      </div>
     </div>
     <div id="snackbar">Some text some message..</div>
+
+    <ul class="background">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+    
 
     <script src="js/index.js"></script>
   </body>
