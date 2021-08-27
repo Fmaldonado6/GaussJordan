@@ -56,22 +56,28 @@ function validateMatrix(matrixParam) {
 
 
   //for para hacerle k pasadas a la matriz (indispensable) dificil de explicar en texto xd
-  for (let k = 0; k < matrixSize; k++) {
+ // for (let k = 0; k < matrixSize; k++) {
+
+ let map = {};
     for (let i = 0; i < matrixSize; i++) {
       //verifica si el pivote es distinto de cero
       if (matrixParam[i][i] != 0) continue;
       for (let j = 0; j < matrixSize; j++) {
         //si la fila tiene algo distinto a cero en la posicion que estamos buscando
         //intercambia las filas
-        if (matrixParam[j][i] != 0) {
+        if (matrixParam[j][i] != 0 && map[matrixParam]==null) {
           let temp = matrixParam[i];
           matrixParam[i] = matrixParam[j];
           matrixParam[j] = temp;
+          map[matrixParam] = matrixParam;
           break;
+        }else{
+
+          continue;
         }
       }
     }
-  }
+ // }
 
   return matrixParam;
 }
