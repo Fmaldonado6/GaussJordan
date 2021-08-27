@@ -54,11 +54,11 @@ function validateMatrix(matrixParam) {
     }
   }
 
-
-  //for para hacerle k pasadas a la matriz (indispensable) dificil de explicar en texto xd
- // for (let k = 0; k < matrixSize; k++) {
-
- let map = {};
+//for para hacerle k pasadas a la matriz (indispensable) dificil de explicar en texto xd
+ 
+  for (let k = 0; k < matrixSize; k++) {
+    let map = {};
+ 
     for (let i = 0; i < matrixSize; i++) {
       //verifica si el pivote es distinto de cero
       if (matrixParam[i][i] != 0) continue;
@@ -77,7 +77,7 @@ function validateMatrix(matrixParam) {
         }
       }
     }
- // }
+  }
 
   return matrixParam;
 }
@@ -98,6 +98,7 @@ function solveMatrix(matrixParam) {
       }
     }
   }
+  console.log(matrixParam);
   return matrixParam;
 }
 
