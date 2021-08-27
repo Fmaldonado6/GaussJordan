@@ -34,45 +34,26 @@ function generateMatrix() {
 }
 
 function validateMatrix(matrixParam) {
-  matrixSize = Number.parseFloat(matrixSizeInput.value);
-  const values = [];
 
-  for (let k = 0; k < matrixSize; k++) {
-    let val; //booleano que indica si uno de los terminos es linealmente independiente del mismo
-    //en la fila con la que se le compara
-    for (let i = 0; i < matrixSize; i++) {
-      //for que controla a la fila estatica en cada comparacion
-      val = true; //se inicia en true para despues pasar a false si hay alguno que sea independiente
-      //con uno que sea independiente es suficiente para que sean validas las ecuaciones
-      for (let j = 0; j < matrixSize; j++) {
-        //for que controla la iteracion de la fila con la que se compara la fila de i
-        if (i == j) continue;
-        for (let k = 0; k < matrixSize + 1; k++) {
-          //for que controla la iteracion de las columnas (terminos) que se comparan
-          if (i == j) continue;
-          if (matrixParam[i][k] % matrixParam[j][k] != 0) {
-            //si uno de los terminos es independiente, se salta a la siguiente fila para comparar
-            if (k == matrixSize) {
-              // este for de k va hasta el vector de soluciones, si todas los demas terminos fueron independientes, pero el ultimo no, entonces es inconsistente
-              console.log("El sistema es inconsistente");
-              return null;
-            }
-            //si no es el ultimo termino simplemente se salta a la siguiente fila para comparar
-            val = false;
-            break;
-          }
-        }
-        if (val) {
-          //si el val es true, no hubo ningun termino independiente en la comparacion por lo que es de soluciones infinitas
+  for (let i = 0; i < matrixSize; i++) {
+    const firstArray = matrixParam[i];
 
-          console.log(
-            "Dos o mas filas son linealmente dependientes por lo que el sistema tiene soluciones infinitas"
-          );
-          return null;
-        }
+    for (let j = 0; j < matrixSize; j++) {
+      if (i == j) continue;
+      const secondArray = matrixParam[j];
+      let times = 0;
+      for (let k = 0; k <= matrixSize; k++) {
+        if (
+          firstArray[k] % secondArray[k] == 0 ||
+          secondArray[k] % firstArray[k] == 0
+        )
+          times++;
       }
+
+      if (times == matrixSize + 1) return null;
     }
   }
+
 
   //for para hacerle k pasadas a la matriz (indispensable) dificil de explicar en texto xd
   for (let k = 0; k < matrixSize; k++) {
