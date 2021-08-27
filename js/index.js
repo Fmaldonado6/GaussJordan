@@ -34,6 +34,7 @@ function generateMatrix() {
 }
 
 function validateMatrix(matrixParam) {
+  
   for (let i = 0; i < matrixSize; i++) {
     const firstArray = matrixParam[i];
 
@@ -42,6 +43,11 @@ function validateMatrix(matrixParam) {
       const secondArray = matrixParam[j];
       let times = 0;
       for (let k = 0; k <= matrixSize; k++) {
+        if (
+          (firstArray[k] == 0 && secondArray[k] != 0) ||
+          (firstArray[k] != 0 && secondArray[k] == 0)
+        )
+          continue;
         if (
           (firstArray[k] == 0 && secondArray[k] == 0) ||
           firstArray[k] % secondArray[k] == 0 ||
@@ -115,9 +121,7 @@ async function calculate() {
     matrix.push(row);
   }
 
-
   matrix = validateMatrix(matrix);
-
 
   if (resultCard.classList.contains("show")) {
     hideResultCard();
