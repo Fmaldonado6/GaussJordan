@@ -34,41 +34,47 @@ function generateMatrix() {
 }
 
 function validateMatrix(matrixParam) {
-  
   //for para controlar la fila de referencia para comparar y determinar
   //independencia lineal con las demas
   for (let i = 0; i < matrixSize; i++) {
     const firstArray = matrixParam[i];
+    let previousDiv1;
+    let previousDiv2;
     //for para determinar la segunda fila a comparar
     for (let j = 0; j < matrixSize; j++) {
       if (i == j) continue;
+
       const secondArray = matrixParam[j];
 
+      if (!previousDiv1 && !previousDiv2) {
+        previousDiv1 =
+          secondArray[0] != 0 ? firstArray[0] / secondArray[0] : null;
+
+        previousDiv2 =
+          firstArray[0] != 0 ? secondArray[0] / firstArray[0] : null;
+      }
       //contador para saber si todos los terminos son linealmente dependientes
       let times = 0;
       //for para iterar cada elemento de las filas y compararlos
       for (let k = 0; k <= matrixSize; k++) {
         //si uno de los elementos es cero y el otro no, se salta al siguente
+
+        const firstNumber = firstArray[k];
+        const secondNumber = secondArray[k];
+
         if (
-          (firstArray[k] == 0 && secondArray[k] != 0) ||
-          (firstArray[k] != 0 && secondArray[k] == 0)
-        )
-          continue;
-        //si ambos son cero o son divisibles entre si, se cuenta y se sigue con el ciclo
-        if (
-          (firstArray[k] == 0 && secondArray[k] == 0) ||
-          firstArray[k] % secondArray[k] == 0 ||
-          secondArray[k] % firstArray[k] == 0
+          firstNumber / secondNumber == previousDiv1 ||
+          secondNumber / firstNumber == previousDiv2
         )
           times++;
       }
+      console.log(times);
       //si el contador times queda con el valor del tamaño de la matriz mas uno
       //significa que son dependientes dos o mas ecuaciones y se sale de los ciclos
       if (times == matrixSize + 1) return null;
     }
   }
 
-  
   //hash map que registrará los estados de la matriz para evitar ciclos redundantes
   let map = {};
   //for para hacerle k pasadas a la matriz (indispensable) como un ordenamiento burbuja
@@ -79,7 +85,6 @@ function validateMatrix(matrixParam) {
       if (matrixParam[i][i] != 0) continue;
       //for para iterar las filas e intercambiar si es conveniente
       for (let j = 0; j < matrixSize; j++) {
-        
         //se crea una copia del arreglo para operar en ella y verificar si ya pasamos por ahi
         const newMatrix = JSON.parse(JSON.stringify(matrixParam));
         //si la fila tiene algo distinto a cero en la posicion que estamos buscando
@@ -108,12 +113,14 @@ function solveMatrix(matrixParam) {
   for (let i = 0; i < matrixSize; i++) {
     for (let j = 0; j < matrixSize; j++) {
       if (i == j) continue;
-
+      //Dividimos el elemento de la diagnoal entre el valor que quermos hacer 0
       let temp = matrixParam[j][i] / matrixParam[i][i];
 
+      //Validamos que el valor no sea indefnidio
       if (Number.isNaN(temp) || !Number.isFinite(temp)) return null;
 
       for (let k = 0; k <= matrixSize; k++) {
+        //Operamos la fila con el valor calculado
         matrixParam[j][k] -= matrixParam[i][k] * temp;
       }
     }
