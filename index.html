@@ -21,13 +21,16 @@
       <div class="card elevation-2">
         <span class="title">Gauss Jordan</span>
         <div class="size-input">
-          <input
-            id="size"
-            placeholder="Tamaño de matriz"
-            type="number"
-            value="3"
-          />
-  
+          <div class="size-input-container">
+            <label for="size">Tamaño de la matriz</label>
+            <input
+              id="size"
+              placeholder="Tamaño de matriz"
+              type="number"
+              value="3"
+            />
+          </div>
+
           <button class="button elevation-1" onclick="generateMatrix()">
             Generar
           </button>
@@ -48,9 +51,7 @@
         <div class="title">
           <span>Resultado</span>
         </div>
-        <div id="results">
-
-        </div>
+        <div id="results"></div>
       </div>
     </div>
     <div id="snackbar">Some text some message..</div>
@@ -69,7 +70,6 @@
       <li></li>
       <li></li>
     </ul>
-    
 
     <script src="js/index.js"></script>
   </body>

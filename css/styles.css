@@ -10,6 +10,7 @@ body {
 
 .size-input {
   display: flex;
+  align-items: flex-end;
 }
 
 .size-input input {
@@ -35,6 +36,7 @@ body {
 
 .size-input .button {
   margin-left: auto;
+  max-height: 35px;
 }
 
 .button {
@@ -158,6 +160,16 @@ body {
   visibility: visible;
   -webkit-animation: cardFadeOut 0.3s forwards;
   animation: cardFadeOut 0.3s forwards;
+}
+
+.size-input-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.size-input-container label {
+  font-size: 13px;
+  margin-bottom: 10px;
 }
 
 @-webkit-keyframes cardFadeOut {

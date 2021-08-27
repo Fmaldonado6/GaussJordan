@@ -9,8 +9,11 @@ let matrixSize = 3;
 function generateMatrix() {
   matrixSize = Number.parseFloat(matrixSizeInput.value);
 
-  if(matrixSize <2)
-    return showSnackbar("El tamaño de la matriz no puede ser menor a 2")
+  if (matrixSize < 2)
+    return showSnackbar("El tamaño de la matriz no puede ser menor a 2");
+
+  if (matrixSize > 10)
+    return showSnackbar("El tamaño de la matriz no puede ser mayor a 10");
 
   matrixContainer.innerHTML = "";
 
@@ -94,13 +97,13 @@ async function calculate() {
     matrix.push(row);
   }
 
-  console.log(resultCard.classList.contains("show"))
+  console.log(resultCard.classList.contains("show"));
 
   matrix = validateMatrix(matrix);
 
   if (resultCard.classList.contains("show")) {
-    hideResultCard()
-    await delay(300)
+    hideResultCard();
+    await delay(300);
   }
 
   if (!matrix)
@@ -150,12 +153,11 @@ function showSnackbar(message) {
 }
 
 function delay(delayInms) {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     setTimeout(() => {
       resolve(2);
     }, delayInms);
   });
 }
-
 
 generateMatrix();
