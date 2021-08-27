@@ -35,19 +35,26 @@ function generateMatrix() {
 
 function validateMatrix(matrixParam) {
   
+  //for para controlar la fila de referencia para comparar y determinar
+  //independencia lineal con las demas
   for (let i = 0; i < matrixSize; i++) {
     const firstArray = matrixParam[i];
-
+    //for para determinar la segunda fila a comparar
     for (let j = 0; j < matrixSize; j++) {
       if (i == j) continue;
       const secondArray = matrixParam[j];
+
+      //contador para saber si todos los terminos son linealmente dependientes
       let times = 0;
+      //for para iterar cada elemento de las filas y compararlos
       for (let k = 0; k <= matrixSize; k++) {
+        //si uno de los elementos es cero y el otro no, se salta al siguente
         if (
           (firstArray[k] == 0 && secondArray[k] != 0) ||
           (firstArray[k] != 0 && secondArray[k] == 0)
         )
           continue;
+        //si ambos son cero o son divisibles entre si, se cuenta y se sigue con el ciclo
         if (
           (firstArray[k] == 0 && secondArray[k] == 0) ||
           firstArray[k] % secondArray[k] == 0 ||
@@ -55,30 +62,38 @@ function validateMatrix(matrixParam) {
         )
           times++;
       }
+      //si el contador times queda con el valor del tamaño de la matriz mas uno
+      //significa que son dependientes dos o mas ecuaciones y se sale de los ciclos
       if (times == matrixSize + 1) return null;
     }
   }
 
-  //for para hacerle k pasadas a la matriz (indispensable) dificil de explicar en texto xd
-
+  
+  //hash map que registrará los estados de la matriz para evitar ciclos redundantes
   let map = {};
+  //for para hacerle k pasadas a la matriz (indispensable) como un ordenamiento burbuja
   for (let k = 0; k < matrixSize; k++) {
+    //for para controlar los pivotes con i
     for (let i = 0; i < matrixSize; i++) {
       //verifica si el pivote es distinto de cero
       if (matrixParam[i][i] != 0) continue;
+      //for para iterar las filas e intercambiar si es conveniente
       for (let j = 0; j < matrixSize; j++) {
+        
+        //se crea una copia del arreglo para operar en ella y verificar si ya pasamos por ahi
+        const newMatrix = JSON.parse(JSON.stringify(matrixParam));
         //si la fila tiene algo distinto a cero en la posicion que estamos buscando
         //intercambia las filas
-
-        const newMatrix = JSON.parse(JSON.stringify(matrixParam));
         if (newMatrix[j][i] != 0) {
           let temp = newMatrix[i];
           newMatrix[i] = newMatrix[j];
           newMatrix[j] = temp;
         }
-
+        //si nuestro hash map ya contiene a ese orden guardado se salta a otra fila
         if (map[newMatrix]) continue;
+        //si no estaba en el hash map se queda como se modificó
         matrixParam = newMatrix;
+        //se añade este estado al hash map
         map[matrixParam] = matrixParam;
       }
     }
