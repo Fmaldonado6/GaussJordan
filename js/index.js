@@ -34,7 +34,6 @@ function generateMatrix() {
 }
 
 function validateMatrix(matrixParam) {
-
   for (let i = 0; i < matrixSize; i++) {
     const firstArray = matrixParam[i];
 
@@ -44,37 +43,37 @@ function validateMatrix(matrixParam) {
       let times = 0;
       for (let k = 0; k <= matrixSize; k++) {
         if (
+          (firstArray[k] == 0 && secondArray[k] == 0) ||
           firstArray[k] % secondArray[k] == 0 ||
           secondArray[k] % firstArray[k] == 0
         )
           times++;
       }
-
       if (times == matrixSize + 1) return null;
     }
   }
 
-//for para hacerle k pasadas a la matriz (indispensable) dificil de explicar en texto xd
- 
+  //for para hacerle k pasadas a la matriz (indispensable) dificil de explicar en texto xd
+
+  let map = {};
   for (let k = 0; k < matrixSize; k++) {
-    let map = {};
- 
     for (let i = 0; i < matrixSize; i++) {
       //verifica si el pivote es distinto de cero
       if (matrixParam[i][i] != 0) continue;
       for (let j = 0; j < matrixSize; j++) {
         //si la fila tiene algo distinto a cero en la posicion que estamos buscando
         //intercambia las filas
-        if (matrixParam[j][i] != 0 && map[matrixParam]==null) {
-          let temp = matrixParam[i];
-          matrixParam[i] = matrixParam[j];
-          matrixParam[j] = temp;
-          map[matrixParam] = matrixParam;
-          break;
-        }else{
 
-          continue;
+        const newMatrix = JSON.parse(JSON.stringify(matrixParam));
+        if (newMatrix[j][i] != 0) {
+          let temp = newMatrix[i];
+          newMatrix[i] = newMatrix[j];
+          newMatrix[j] = temp;
         }
+
+        if (map[newMatrix]) continue;
+        matrixParam = newMatrix;
+        map[matrixParam] = matrixParam;
       }
     }
   }
@@ -98,7 +97,6 @@ function solveMatrix(matrixParam) {
       }
     }
   }
-  console.log(matrixParam);
   return matrixParam;
 }
 
@@ -117,9 +115,9 @@ async function calculate() {
     matrix.push(row);
   }
 
-  console.log(resultCard.classList.contains("show"));
 
   matrix = validateMatrix(matrix);
+
 
   if (resultCard.classList.contains("show")) {
     hideResultCard();
